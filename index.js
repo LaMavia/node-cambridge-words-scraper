@@ -30,8 +30,8 @@ let makeUrl = (word = '') =>
 
 const format = def => {
   return `${def.word}\n${def.defs
-    .map((d, i) => `${i + 1}) ${d.def}\nEx${i}.: ${d.eg}`).join("\n")
-  }\n\n\n`
+    .map((d, i) => `${i + 1}) ${d.def}\nEx${i + 1}.: ${d.eg}`)
+    .join('\n')}\n\n\n`
 }
 
 const scrapeWord = (word, browser) =>
@@ -78,15 +78,13 @@ async function main() {
   )).filter(Boolean)
 
   await browser.close()
-  const saveStream = fs.createWriteStream("formatted.txt", {
-    encoding: 'utf-8'
+  const saveStream = fs.createWriteStream('formatted.txt', {
+    encoding: 'utf-8',
   })
 
   const readableStream = new stream.Readable()
   readableStream.pipe(saveStream)
-  loaded
-    .map(format)
-    .forEach(f => readableStream.push(f, "utf-8"))
+  loaded.map(format).forEach(f => readableStream.push(f, 'utf-8'))
   readableStream.push(null)
 
   await fs.writeFile('output.json', JSON.stringify(loaded, null, 2))
