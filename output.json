@@ -1,0 +1,70 @@
+[
+  {
+    "word": "carrot",
+    "defs": [
+      {
+        "def": "a long pointed orange root eaten as a vegetable",
+        "eg": "It's rather early to be sowing carrot seeds, isn't it?"
+      },
+      {
+        "def": "a long, pointed, orange root, eaten as vegetable, either raw or cooked",
+        "eg": "If they finished the construction ahead of schedule, they were offered the carrot of a bonus."
+      }
+    ]
+  },
+  {
+    "word": "space",
+    "defs": [
+      {
+        "def": "an empty area that is available to be used:",
+        "eg": "Is there any space for my clothes in that cupboard?"
+      },
+      {
+        "def": "to arrange things or people so that there is some distance or time between them:",
+        "eg": "That page looks badly spaced (= there is too much/too little distance between the lines or words)."
+      },
+      {
+        "def": "an empty place:",
+        "eg": "a parking/storage space"
+      },
+      {
+        "def": "to arrange the distance between things:",
+        "eg": "Try to space the stitches evenly as you sew."
+      },
+      {
+        "def": "an empty area that is available to be used:",
+        "eg": "There is greater demand for downtown office space."
+      }
+    ]
+  },
+  {
+    "word": "life",
+    "defs": [
+      {
+        "def": "the period between birth and death, or the experience or state of being alive:",
+        "eg": "Life's too short to worry about money!"
+      },
+      {
+        "def": "the period between birth and death, or the state of being alive:",
+        "eg": "Life is too short to worry about money!"
+      },
+      {
+        "def": "the amount of time that something exists or works:",
+        "eg": "He would reach retirement during the life of the mortgage."
+      }
+    ]
+  },
+  {
+    "word": "exacerbate",
+    "defs": [
+      {
+        "def": "to make something that is already bad even worse:",
+        "eg": "This attack will exacerbate the already tense relations between the two communities."
+      },
+      {
+        "def": "to make something that is already bad worse:",
+        "eg": "Her allergy was exacerbated by the dust."
+      }
+    ]
+  }
+]
