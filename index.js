@@ -1,6 +1,6 @@
 const pptr = require('puppeteer')
 const fs = require('fs-extra')
-const path = require('path')
+const stream = require('stream')
 
 let f = () => {
   let rs = [...document.querySelectorAll('.entry-body__el')]
@@ -28,15 +28,23 @@ let makeUrl = (word = '') =>
     '-'
   )}`
 
+const format = def => {
+  return `${def.word}\n${def.defs
+    .map((d, i) => `${i + 1}) ${d.def}\nEx${i}.: ${d.eg}`).join("\n")
+  }\n\n\n`
+}
+
 const scrapeWord = (word, browser) =>
   new Promise(async (res, rej) => {
     const page = await browser.newPage()
-    const omit = await page.goto(makeUrl(word), {
-      waitUntil: 'domcontentloaded'
-    }).catch(e => {
-      console.error(e)
-      return new Error(e)
-    })
+    const omit = await page
+      .goto(makeUrl(word), {
+        waitUntil: 'domcontentloaded',
+      })
+      .catch(e => {
+        console.error(e)
+        return new Error(e)
+      })
     if (omit instanceof Error) {
       console.error(`Omitting the word "${word}"`)
       return
@@ -45,12 +53,12 @@ const scrapeWord = (word, browser) =>
     await page.close()
     res(defs)
   })
-main()
+process.argv[2] ? main() : console.error('Error: Path not included.')
 
 async function main() {
-  console.time("Took")
+  console.time('Took')
   const input = await fs
-    .readFile(path.resolve(__dirname, 'input.txt'), 'utf-8')
+    .readFile(process.argv[2], 'utf-8')
     .catch(err => err !== null && new Error(err))
   if (input instanceof Error) {
     console.error(`Error loading the input file: ${input};\nEXITING`)
@@ -70,6 +78,17 @@ async function main() {
   )).filter(Boolean)
 
   await browser.close()
+  const saveStream = fs.createWriteStream("formatted.txt", {
+    encoding: 'utf-8'
+  })
+
+  const readableStream = new stream.Readable()
+  readableStream.pipe(saveStream)
+  loaded
+    .map(format)
+    .forEach(f => readableStream.push(f, "utf-8"))
+  readableStream.push(null)
+
   await fs.writeFile('output.json', JSON.stringify(loaded, null, 2))
-  console.timeEnd("Took")
+  console.timeEnd('Took')
 }
