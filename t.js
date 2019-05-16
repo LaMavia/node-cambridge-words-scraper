@@ -1,1 +1,5 @@
-console.log(process.argv[2])
+const { args } = require("./helpers/parseArgs")
+
+console.dir(args({
+  name: "John"
+}), {colors: true, depth: 3})
